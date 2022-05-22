@@ -6,11 +6,6 @@ node {
     stage('Build image') {
        app = docker.build("jycho98/test")
     }
-    stage('Test image') {
-       app.inside {
-           sh 'make test'
-       }
-    }
     stage('Push image') {
        docker.withRegistry('https://registry.hub.docker.com', 'jycho98') {
           app.push("${env.BUILD_NUMBER}")
